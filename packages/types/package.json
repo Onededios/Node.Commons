@@ -1,0 +1,11 @@
+{
+  "name": "@onededios/node-commons-types",
+  "version": "1.0.0",
+  "description": "Type definitions for @onededios/node-commons",
+  "main": "index.ts",
+  "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onededios/node-commons.git"
+  }
+}

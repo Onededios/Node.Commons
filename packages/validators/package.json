@@ -1,0 +1,14 @@
+{
+  "name": "@onededios/node-commons-validators",
+  "version": "1.0.0",
+  "description": "A collection of validators for Node.js applications.",
+  "main": "index.ts",
+  "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onededios/node-commons.git"
+  },
+  "dependencies": {
+    "@onededios/node-commons-types": "*"
+  }
+}

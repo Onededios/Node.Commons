@@ -1,0 +1,12 @@
+{
+  "name": "node-commons",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "targets": {
+    "test": {
+      "executor": "@nx/vite:vitest",
+      "options": {
+        "config": "packages/tu-lib/vitest.config.ts"
+      }
+    }
+  }
+}

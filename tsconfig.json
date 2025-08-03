@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "target": "ES2019",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDir": "packages",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "exactOptionalPropertyTypes": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
+    "composite": true,
+    "stripInternal": true
+  },
+  "include": ["packages/**/*"]
+}
