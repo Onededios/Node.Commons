@@ -1,5 +1,5 @@
 {
-  "name": "node-commons",
+  "name": "@onededios/node-commons",
   "private": true,
   "workspaces": [
     "packages/*"

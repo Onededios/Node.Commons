@@ -1,6 +1,7 @@
 {
   "name": "node-commons",
   "$schema": "node_modules/nx/schemas/project-schema.json",
+  "tags": ["type:library", "scope:onededios"],
   "targets": {
     "test": {
       "executor": "@nx/vite:vitest",

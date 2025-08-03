@@ -1,9 +1,0 @@
-{
-  "name": "@onededios/node-commons-parser",
-  "version": "1.0.0",
-  "description": "Parsing management for @onededios/node-commons",
-  "dependencies": {
-    "@onededios/node-commons-validator": "*",
-    "@onededios/node-commons-types": "*"
-  }
-}

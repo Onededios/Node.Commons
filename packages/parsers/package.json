@@ -1,0 +1,10 @@
+{
+  "name": "@onededios/node-commons-parsers",
+  "version": "1.0.0",
+  "description": "A collection of parsers for Node.js applications.",
+  "projectType": "library",
+  "dependencies": {
+    "@onededios/node-commons-validators": "*",
+    "@onededios/node-commons-types": "*"
+  }
+}

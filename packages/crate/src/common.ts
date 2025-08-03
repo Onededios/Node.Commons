@@ -17,7 +17,7 @@ export abstract class Common {
 
   protected readonly isDir = (): boolean => this.fullPath.endsWith('/');
 
-  protected readonly getFullPath = (relativePath: string): string =>
+  public readonly getFullPath = (relativePath: string): string =>
     path.resolve(this.fullPath, relativePath);
 
   private readonly exists = (): boolean => existsSync(this.getCurrentPath());

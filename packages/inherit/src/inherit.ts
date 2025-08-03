@@ -1,24 +1,74 @@
-import { Directory, File } from '@onededios/node-commons-crate';
+import { parseAsString } from '@onededios/node-commons-parsers';
+import { ArgumentsBuilder } from '@onededios/node-commons-process';
+import { File, Directory } from '@onededios/node-commons-crate';
 
+const builder = new ArgumentsBuilder({
+  BASE_PACKAGE_PATH: parseAsString,
+  FOLDER_TO_REPLACE_PATH: parseAsString,
+});
 
-  constructor(relative: string) {
-    const fullPath = new File(relative).getCurrentPath();
-    if (!fullPath.endsWith('/'))
-      throw new Error(`Path must be a directory: ${fullPath}`);
-    this.fullPath = fullPath;
+function deepMerge(
+  obj1: Record<string, unknown>,
+  obj2: Record<string, unknown>
+): Record<string, unknown> {
+  const result = { ...obj1 };
+
+  for (const key of Object.keys(obj2)) {
+    const value2 = obj2[key];
+    const value1 = obj1[key];
+
+    if (
+      value2 &&
+      typeof value2 === 'object' &&
+      !Array.isArray(value2) &&
+      value1 &&
+      typeof value1 === 'object' &&
+      !Array.isArray(value1)
+    ) {
+      result[key] = deepMerge(
+        value1 as Record<string, unknown>,
+        value2 as Record<string, unknown>
+      );
+    } else {
+      result[key] = value2;
+    }
   }
+  return result;
+}
 
-  private findPackagesPaths(): string[] {
-    const base = new Directory(this.fullPath);
-    const childDirs = base.getDirs();
+async function processPackages() {
+  try {
+    const baseFile = new File(builder.arguments.BASE_PACKAGE_PATH);
+    const baseParsed = await baseFile.readJSONAsync();
+    const baseParsedObj = baseParsed as Record<string, unknown>;
 
-    const paths: string[] = [];
+    const packageDir = new Directory(builder.arguments.FOLDER_TO_REPLACE_PATH);
+    const dirs = packageDir.getDirs();
 
-    childDirs.forEach((dir) => {
-      const packageDir = new Directory(dir);
-      if (packageDir.isChildPresent('package.json'))
-        paths.push(packageDir.getCurrentPath());
+    const processPromises = dirs.map(async (dir) => {
+      const currentPackage = new Directory(dir);
+
+      if (currentPackage.isChildPresent('package.json')) {
+        try {
+          const file = new File(currentPackage.getFullPath('package.json'));
+          const parsed = await file.readJSONAsync();
+          const parsedObj = parsed as Record<string, unknown>;
+          const merged = deepMerge(baseParsedObj, parsedObj);
+
+          await file.writeAsync(JSON.stringify(merged, null, 2));
+          console.log(`✓ Updated package.json in ${dir}`);
+        } catch (error) {
+          console.error(`✗ Failed to process ${dir}:`, error);
+        }
+      }
     });
 
-    return paths;
+    await Promise.all(processPromises);
+    console.log('✓ All packages processed successfully');
+  } catch (error) {
+    console.error('✗ Failed to read base package.json:', error);
+    process.exit(1);
   }
+}
+
+processPackages();

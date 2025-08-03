@@ -1,5 +1,6 @@
 {
   "name": "@onededios/node-commons-crate",
   "version": "1.0.0",
-  "description": "File and directory utilities for Node.js"
+  "description": "File and directory utilities for Node.js",
+  "projectType": "library"
 }

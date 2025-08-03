@@ -16,7 +16,7 @@ export class ArgumentsBuilder<
 
   private parseArguments(): Record<string, string> {
     const args: Record<string, string> = {};
-    const argv = process.argv.slice(2);
+    const argv = process.argv.slice(2); // Remove 'node' and script name
 
     let i = 0;
     while (i < argv.length) {

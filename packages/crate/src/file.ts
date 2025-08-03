@@ -31,4 +31,7 @@ export class File<T = unknown> extends Common {
    */
   public readonly readJSONAsync = async (): Promise<T> =>
     JSON.parse(await this.readAsync());
+
+  public readonly writeAsync = async (data: string) =>
+    await promises.writeFile(this.getCurrentPath(), data);
 }

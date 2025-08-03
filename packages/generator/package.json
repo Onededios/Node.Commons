@@ -1,11 +1,10 @@
 {
   "name": "@onededios/node-commons-generator",
   "version": "1.0.0",
-  "description": "Code generation utilities for @onededios/node-commons",
-  "main": "index.ts",
-  "types": "index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/onededios/node-commons.git"
+  "description": "Object generation utilities for Node.js projects",
+  "dependencies": {
+    "random-js": "^2.1.0",
+    "@onededios/node-commons-validators": "^1.0.0",
+    "@onededios/node-commons-types": "^1.0.0"
   }
 }
