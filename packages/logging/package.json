@@ -1,11 +1,5 @@
 {
   "name": "@onededios/node-commons-logging",
   "version": "1.0.0",
-  "description": "Logging utilities for @onededios/node-commons",
-  "main": "index.ts",
-  "types": "index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/onededios/node-commons.git"
-  }
+  "description": "Logging utilities for @onededios/node-commons"
 }

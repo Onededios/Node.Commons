@@ -1,0 +1,5 @@
+{
+  "name": "@onededios/node-commons-process",
+  "version": "1.0.0",
+  "description": "Node process management utilities for Node.js applications."
+}

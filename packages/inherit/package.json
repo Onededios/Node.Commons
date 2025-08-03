@@ -1,0 +1,8 @@
+{
+  "name": "@onededios/node-commons-inherit",
+  "version": "1.0.0",
+  "description": "Package for inheriting configurations and scripts in Node.js applications.",
+  "dependencies": {
+    "@onededios/node-commons-crate": "1.0.0"
+  }
+}

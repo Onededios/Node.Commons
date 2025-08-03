@@ -1,7 +1,5 @@
 {
-  "name": "@onededios/node-commons-environment",
-  "version": "1.0.0",
-  "description": "Environment management for @onededios/node-commons",
+  "license": "Apache-2.0",
   "main": "index.ts",
   "types": "index.d.ts",
   "repository": {

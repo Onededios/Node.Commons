@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "inherit": "node scripts/inherit.js",
     "generate": "node scripts/generate.js",
     "build": "nx run-many --target=build --all",
     "test": "nx run-many --target=test --all",
@@ -26,13 +27,10 @@
     "@vitest/ui": "^3.2.4",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
-    "jiti": "2.4.2",
-    "jsonc-eslint-parser": "^2.1.0",
     "nx": "^21.3.11",
     "prettier": "^2.6.2",
     "typescript": "~5.8.2",
     "typescript-eslint": "^8.29.0",
-    "verdaccio": "^6.0.5",
     "vite": "^6.0.0"
   },
   "dependencies": {
