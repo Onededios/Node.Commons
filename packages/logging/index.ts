@@ -1,2 +1,1 @@
-module.exports = {};
-export {};
+export { Logger } from './src/logger';

@@ -10,7 +10,8 @@
     "build": "nx run-many --target=build --all",
     "test": "nx run-many --target=test --all",
     "lint": "nx run-many --target=lint --all",
-    "format": "nx format:write"
+    "format": "nx format:write",
+    "watch": "tsc --watch"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
@@ -36,7 +37,8 @@
   "dependencies": {
     "@nx/js": "^21.3.11",
     "@nx/plugin": "^21.3.11",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@onedios/node-commons-inherit": "latest"
   },
   "nx": {
     "includedScripts": []

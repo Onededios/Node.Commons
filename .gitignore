@@ -146,3 +146,5 @@ vite.config.ts.timestamp-*
 .github/instructions/nx.instructions.md
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
+
+package-lock.json

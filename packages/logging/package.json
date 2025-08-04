@@ -1,5 +1,9 @@
 {
   "name": "@onededios/node-commons-logging",
   "version": "1.0.0",
-  "description": "Logging utilities for @onededios/node-commons"
+  "description": "Logging utilities for Node.js applications",
+  "dependencies": {
+    "@onededios/node-commons-types": "^1.0.0",
+    "@onededios/node-commons-enum": "^1.0.0"
+  }
 }

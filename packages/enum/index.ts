@@ -1,2 +1,1 @@
-module.exports = {};
-export {};
+export { Enum } from './src/enum';

@@ -5,8 +5,4 @@ import { random } from './common';
 /**
  * Generates a **random {@link GUID}**.
  */
-export function getRndGUID(): GUID {
-  const guid = random.uuid4();
-  if (!isGUID(guid)) throw new Error('Generated GUID is invalid');
-  return guid;
-}
+export const getRndGUID = (): GUID => random.uuid4() as GUID;
