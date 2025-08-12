@@ -40,7 +40,15 @@ import { config } from 'dotenv';
 export class EnvironmentBuilder<
   P extends Record<string, (raw: string) => unknown>
 > {
-  /** Parsed, fully-typed environment variables. */
+  /**
+   * An object containing environment variables, where each key corresponds to a property in `P`
+   * and its value is the result of invoking the respective function in `P`.
+   * 
+   * @readonly
+   * @typeParam P - The type representing the set of environment variable factories.
+   * @remarks
+   * This property provides a strongly-typed, immutable mapping of environment variable names to their computed values.
+   */
   public readonly variables: Readonly<{ [K in keyof P]: ReturnType<P[K]> }>;
 
   /**

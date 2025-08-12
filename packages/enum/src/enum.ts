@@ -46,7 +46,7 @@ export class Enum {
    *
    * @typeParam T - Record representing the desired enum.
    * @param map   - Source map; its keys and values are copied verbatim.
-   * @returns     Shallow copy of {@link map}.
+   * @returns     Shallow copy of map.
    *
    * @example
    * ```ts

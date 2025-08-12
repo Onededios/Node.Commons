@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "Error handling utilities for Node.js",
   "dependencies": {
-    "@onededios/node-commons-logging": "^1.0.0"
+    "@onededios/node-commons-logging": "latest"
   }
 }

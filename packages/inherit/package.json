@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Package for inheriting configurations and scripts in Node.js applications.",
   "dependencies": {
-    "@onededios/node-commons-crate": "1.0.0",
-    "@onededios/node-commons-process": "1.0.0",
-    "@onededios/node-commons-parsers": "1.0.0"
+    "@onededios/node-commons-crate": "latest",
+    "@onededios/node-commons-process": "latest",
+    "@onededios/node-commons-parsers": "latest"
+  },
+  "bin": {
+    "inherit": "./bin/cli.js"
   }
 }

@@ -1,1 +1,1 @@
-export * from './src/inherit';
+export { processPackages } from './src/inherit';

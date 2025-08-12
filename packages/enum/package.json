@@ -1,8 +1,5 @@
 {
   "name": "@onededios/node-commons-enum",
   "version": "1.0.0",
-  "description": "Enumeration utilities for Node.js applications",
-  "dependencies": {
-    "@onededios/node-commons-types": "^1.0.0"
-  }
+  "description": "Enumeration utilities for Node.js applications"
 }

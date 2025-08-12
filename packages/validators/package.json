@@ -9,6 +9,6 @@
     "url": "git+https://github.com/onededios/node-commons.git"
   },
   "dependencies": {
-    "@onededios/node-commons-types": "*"
+    "@onededios/node-commons-types": "latest"
   }
 }

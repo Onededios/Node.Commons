@@ -4,9 +4,15 @@
   "tags": ["type:library", "scope:onededios"],
   "targets": {
     "test": {
-      "executor": "@nx/vite:vitest",
+      "executor": "nx:run-commands",
       "options": {
-        "config": "packages/tu-lib/vitest.config.ts"
+        "command": "vitest run"
+      }
+    },
+    "test:coverage": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "vitest run --coverage"
       }
     }
   }

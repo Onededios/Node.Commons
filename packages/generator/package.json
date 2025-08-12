@@ -4,7 +4,7 @@
   "description": "Object generation utilities for Node.js projects",
   "dependencies": {
     "random-js": "^2.1.0",
-    "@onededios/node-commons-validators": "^1.0.0",
-    "@onededios/node-commons-types": "^1.0.0"
+    "@onededios/node-commons-validators": "latest",
+    "@onededios/node-commons-types": "latest"
   }
 }

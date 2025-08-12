@@ -6,4 +6,8 @@ import { random } from './common';
  * @param length - Desired string length (must be ≥ 1).
  * @returns      Pseudo-random string, e.g. `'x7B9Qa'`.
  */
-export const getRndString = (length: number): string => random.string(length);
+export const getRndString = (length: number): string =>
+  random.string(
+    length,
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+  );

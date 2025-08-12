@@ -1,26 +1,27 @@
-import { EnumValues } from '@onededios/node-commons-types';
-import { Enum } from '@onededios/node-commons-enum';
+import { Enum, EnumValues } from '@onededios/node-commons-enum';
 
 /**
- * Console-based logger that formats messages and conditionally
- * suppresses chatty output (e.g. **debug** logs) in production.
+ * Provides a structured and color-coded logging utility for console output,
+ * supporting multiple log levels such as info, warning, error, success, and debug.
  *
- * @remarks
- * Pass the current deployment environment once when you create
- * the instance.
- * In production (`"pro"`) {@link Logger.debug | debug()} is ignored,
- * while other levels always reach the console.
+ * The {@link Logger} class formats log messages with timestamps, log level,
+ * origin signature, and color coding for improved readability in the console.
+ *
+ * The log level emission is governed by the deployment environment, allowing
+ * debug messages to be suppressed in production environments.
  *
  * @example
- * ```ts
- * import { Logger } from './logger';
+ * const logger = new Logger('dev');
+ * logger.INFO('Application started.');
+ * logger.WARN('Low disk space.');
+ * logger.ERROR('Unhandled exception occurred.');
+ * logger.SUCCESS('User registration completed.');
+ * logger.DEBUG('Variable x value:', x);
  *
- * const logger = new Logger('dev');      // ⇠ emit all levels
- * logger.info('Server started');         // [INFO] Server started
- *
- * const prodLogger = new Logger();       // ⇠ defaults to 'pro'
- * prodLogger.debug('Cache miss');        // (suppressed)
- * ```
+ * @remarks
+ * - The default environment is `"pro"` (production), which suppresses debug logs.
+ * - Log messages include the origin method and file location for easier tracing.
+ * - Color codes are applied for each log level to enhance visibility.
  */
 export class Logger {
   /**
@@ -74,15 +75,9 @@ export class Logger {
     console.log(this.format(this.LevelEnum.success, '', msg));
 
   /**
-   * Writes a **debug** message to the console.
+   * Logs a debug message to the console if the current environment is not production.
    *
-   * @remarks
-   * Must set currentEnv different of **pro** to enable debug logs.
-   *
-   * @param msg - The human-readable message to output.
-   * @param currentEnv - The current environment.
-   *
-   * @example Logger.DEBUG('Connecting to database with user "manolo"...');
+   * @param msg - The debug message to log.
    */
   public DEBUG(msg: string) {
     if (this.currentEnv.toLowerCase() === 'pro') return;

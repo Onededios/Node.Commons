@@ -4,7 +4,7 @@
   "description": "A collection of parsers for Node.js applications.",
   "projectType": "library",
   "dependencies": {
-    "@onededios/node-commons-validators": "*",
-    "@onededios/node-commons-types": "*"
+    "@onededios/node-commons-validators": "latest",
+    "@onededios/node-commons-types": "latest"
   }
 }

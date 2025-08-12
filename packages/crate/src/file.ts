@@ -1,7 +1,45 @@
 import { promises } from 'fs';
-import { Common } from './common';
+import { BaseCrate } from './base-crate';
 
-export class File<T = unknown> extends Common {
+/**
+ * Represents a file on the filesystem and provides asynchronous methods for reading and writing.
+ *
+ * This class extends {@link BaseCrate} and ensures that the provided path points to a valid file.
+ * It offers convenient methods for reading file contents as a string, parsing JSON files, and writing data.
+ *
+ * @typeParam T - The expected type of the parsed JSON object when using {@link readJSONAsync}.
+ *
+ * @example
+ * // Reading a text file
+ * const file = new File('example.txt');
+ * file.readAsync().then(contents => console.log(contents));
+ *
+ * @example
+ * // Reading and parsing a JSON file
+ * interface Config { port: number; }
+ * const configFile = new File<Config>('config.json');
+ * configFile.readJSONAsync().then(config => console.log(config.port));
+ *
+ * @example
+ * // Writing to a file
+ * const logFile = new File('log.txt');
+ * logFile.writeAsync('Log entry');
+ *
+ * @throws {Error} If the provided path does not point to a file.
+ *
+ * @see {@link BaseCrate}
+ */
+export class File<T = unknown> extends BaseCrate {
+  /**
+   * Creates a new File instance representing a file at the given relative path.
+   * Throws an error if the provided path does not point to a file.
+   *
+   * @param relative - The relative path to the file.
+   * @throws {Error} If the path does not point to a file.
+   *
+   * @example
+   * const file = new File('data.txt');
+   */
   constructor(relative: string) {
     super(relative);
     if (!this.isFile()) throw new Error(`Path is not a file: ${this.fullPath}`);
@@ -32,6 +70,15 @@ export class File<T = unknown> extends Common {
   public readonly readJSONAsync = async (): Promise<T> =>
     JSON.parse(await this.readAsync());
 
+  /**
+   * Writes data to the file asynchronously.
+   * @param data - The string data to write to the file.
+   * @returns A Promise that resolves when the write operation is complete.
+   *
+   * @example
+   * const handler = new File('output.txt');
+   * await handler.writeAsync('Hello, world!');
+   */
   public readonly writeAsync = async (data: string) =>
     await promises.writeFile(this.getCurrentPath(), data);
 }

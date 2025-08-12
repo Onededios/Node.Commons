@@ -8,10 +8,14 @@
     "inherit": "node scripts/inherit.js",
     "generate": "node scripts/generate.js",
     "build": "nx run-many --target=build --all",
-    "test": "nx run-many --target=test --all",
+    "test": "nx run node-commons:test",
+    "test:coverage": "nx run node-commons:test:coverage",
+    "test:watch": "vitest --ui",
     "lint": "nx run-many --target=lint --all",
     "format": "nx format:write",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "doc": "typedoc --options typedoc.json",
+    "doc:open": "start ./docs/index.html"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
@@ -37,8 +41,9 @@
   "dependencies": {
     "@nx/js": "^21.3.11",
     "@nx/plugin": "^21.3.11",
-    "vitest": "^3.2.4",
-    "@onedios/node-commons-inherit": "latest"
+    "@onedios/node-commons-inherit": "file:packages/inherit",
+    "typedoc": "^0.28.10",
+    "vitest": "^3.2.4"
   },
   "nx": {
     "includedScripts": []

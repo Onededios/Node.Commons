@@ -36,7 +36,20 @@ function deepMerge(
   return result;
 }
 
-async function processPackages() {
+/**
+ * Processes multiple package directories by merging their `package.json` files
+ * with a base package configuration.
+ *
+ * This function reads a base `package.json` file, then iterates through all
+ * directories in a specified folder. For each directory containing a `package.json`,
+ * it merges the base configuration with the existing one using `deepMerge`, and
+ * writes the result back to the file.
+ *
+ * Logs the status of each processed package and handles errors gracefully.
+ *
+ * @throws Will log and exit the process if the base package file cannot be read.
+ */
+export async function processPackages() {
   try {
     const baseFile = new File(builder.arguments.BASE_PACKAGE_PATH);
     const baseParsed = await baseFile.readJSONAsync();
@@ -70,5 +83,3 @@ async function processPackages() {
     process.exit(1);
   }
 }
-
-processPackages();
