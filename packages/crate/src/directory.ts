@@ -28,8 +28,8 @@ export class Directory extends BaseCrate {
    */
   constructor(relative: string) {
     super(relative);
-    if (!this.isDir())
-      throw new Error(`Path is not a directory: ${this.fullPath}`);
+    const isDir = this.isDir();
+    if (!isDir) throw new Error(`Path is not a directory: ${this.fullPath}`);
   }
 
   /**
@@ -39,12 +39,19 @@ export class Directory extends BaseCrate {
    * for all files (excluding directories and other types) found within it.
    *
    * @returns {string[]} An array of absolute file paths for each file in the directory.
+   * @throws {Error} If the directory cannot be read.
    */
   public getFiles(): string[] {
-    const dirs = readdirSync(this.fullPath, { withFileTypes: true });
-    return dirs
-      .filter((dirent) => dirent.isFile())
-      .map((dirent) => `${this.fullPath}/${dirent.name}`);
+    try {
+      const entries = readdirSync(this.fullPath, { withFileTypes: true });
+      return entries
+        .filter((dirent) => dirent.isFile())
+        .map((dirent) => `${this.fullPath}/${dirent.name}`);
+    } catch (err) {
+      throw new Error(
+        `Failed to read files in directory: ${this.fullPath}. ${err}`
+      );
+    }
   }
 
   /**
@@ -59,10 +66,16 @@ export class Directory extends BaseCrate {
    * @throws {Error} If the directory cannot be read (e.g., due to permissions or non-existence).
    */
   public getDirs(): string[] {
-    const dirs = readdirSync(this.fullPath, { withFileTypes: true });
-    return dirs
-      .filter((dirent) => dirent.isDirectory())
-      .map((dirent) => `${this.fullPath}/${dirent.name}`);
+    try {
+      const entries = readdirSync(this.fullPath, { withFileTypes: true });
+      return entries
+        .filter((dirent) => dirent.isDirectory())
+        .map((dirent) => `${this.fullPath}/${dirent.name}`);
+    } catch (err) {
+      throw new Error(
+        `Failed to read subdirectories in directory: ${this.fullPath}. ${err}`
+      );
+    }
   }
 
   /**
@@ -70,9 +83,17 @@ export class Directory extends BaseCrate {
    *
    * @param relativePath - The relative path to the child directory or file to check for presence.
    * @returns `true` if the child is present in the directory; otherwise, `false`.
+   * @throws {Error} If the directory cannot be read.
    */
-  public isChildPresent(relativePath: string): boolean {
-    const fullPath = this.getFullPath(relativePath);
-    return readdirSync(this.fullPath).includes(fullPath);
+  public hasChild(relativePath: string): boolean {
+    const childName = relativePath.replace(/^.*[\\/]/, ''); // get the file or dir name
+    try {
+      const entries = readdirSync(this.fullPath, { withFileTypes: true });
+      return entries.some((dirent) => dirent.name === childName);
+    } catch (err) {
+      throw new Error(
+        `Failed to check child presence in directory: ${this.fullPath}. ${err}`
+      );
+    }
   }
 }

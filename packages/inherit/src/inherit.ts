@@ -61,7 +61,7 @@ export async function processPackages() {
     const processPromises = dirs.map(async (dir) => {
       const currentPackage = new Directory(dir);
 
-      if (currentPackage.isChildPresent('package.json')) {
+      if (currentPackage.hasChild('package.json')) {
         try {
           const file = new File(currentPackage.getFullPath('package.json'));
           const parsed = await file.readJSONAsync();

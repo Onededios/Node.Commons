@@ -1,4 +1,4 @@
-import { promises } from 'fs';
+import { promises, statSync } from 'fs';
 import { BaseCrate } from './base-crate';
 
 /**
@@ -42,7 +42,8 @@ export class File<T = unknown> extends BaseCrate {
    */
   constructor(relative: string) {
     super(relative);
-    if (!this.isFile()) throw new Error(`Path is not a file: ${this.fullPath}`);
+    if (!File.isFileSync(this.getCurrentPath()))
+      throw new Error(`Path is not a file: ${this.getCurrentPath()}`);
   }
 
   /**
@@ -54,21 +55,25 @@ export class File<T = unknown> extends BaseCrate {
    * const handler = new File('notes.txt');
    * handler.readAsync().then(console.log);
    */
-  public readonly readAsync = async (encoding: BufferEncoding = 'utf-8') =>
+  public readAsync = async (
+    encoding: BufferEncoding = 'utf-8'
+  ): Promise<string> =>
     await promises.readFile(this.getCurrentPath(), encoding);
 
   /**
    * Reads and parses the file as JSON.
    * @returns Promise resolving to the parsed JSON object of type T.
-   * @throws Error if the file does not exist.
+   * @throws Error if the file does not exist or JSON is invalid.
    *
    * @example
    * interface User { name: string; }
    * const handler = new File<User>('user.json');
    * handler.readJSONAsync().then(user => console.log(user.name));
    */
-  public readonly readJSONAsync = async (): Promise<T> =>
-    JSON.parse(await this.readAsync());
+  public async readJSONAsync(): Promise<T> {
+    const content = await this.readAsync();
+    return JSON.parse(content) as T;
+  }
 
   /**
    * Writes data to the file asynchronously.
@@ -79,6 +84,19 @@ export class File<T = unknown> extends BaseCrate {
    * const handler = new File('output.txt');
    * await handler.writeAsync('Hello, world!');
    */
-  public readonly writeAsync = async (data: string) =>
+  public writeAsync = async (data: string): Promise<void> =>
     await promises.writeFile(this.getCurrentPath(), data);
+
+  /**
+   * Checks synchronously if the given path is a file.
+   * @param path - The path to check.
+   * @returns True if the path is a file, false otherwise.
+   */
+  private static isFileSync(path: string): boolean {
+    try {
+      return statSync(path).isFile();
+    } catch {
+      return false;
+    }
+  }
 }
